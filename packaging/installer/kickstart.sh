@@ -1192,7 +1192,7 @@ EOF
           run_as_root service netdata restart
         elif command -v rc-service > /dev/null 2>&1; then
           run_as_root rc-service netdata restart
-        elif [ "$(basename "${initpath}" 2> /dev/null)" = "systemd" ]; then
+        elif [ "$(basename "$(echo "${initpath}" 2> /dev/null | awk '{print $1;}')")" = "systemd" ]; then
           run_as_root systemctl restart netdata
         elif [ -f /etc/init.d/netdata ]; then
           run_as_root /etc/init.d/netdata restart
