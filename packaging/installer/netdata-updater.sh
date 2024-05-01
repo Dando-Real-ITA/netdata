@@ -130,7 +130,7 @@ issystemd() {
   fi
 
   # if pid 1 is systemd, it is systemd
-  [ "$(basename "$(readlink /proc/1/exe)" 2> /dev/null)" = "systemd" ] && return 0
+  [ "$(basename "$(echo "$(readlink /proc/1/exe)" | awk '{print $1;}')")" = "systemd" ] && return 0
 
   # if systemd is not running, it is not systemd
   pids=$(safe_pidof systemd 2> /dev/null)
